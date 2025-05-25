@@ -1,1 +1,50 @@
-<p>punto-e works!</p>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h2 class="text-center mb-4">Generador de Código QR 📱</h2>
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <div class="mb-3">
+            <label for="qrText" class="form-label">
+              <strong>Texto o URL a codificar:</strong>
+            </label>
+            <input
+              type="text"
+              id="qrText"
+              class="form-control"
+              [(ngModel)]="texto"
+              placeholder="Ej: https://google.com"
+            />
+          </div>
+          <div class="d-grid">
+            <button 
+              class="btn btn-success btn-lg"
+              (click)="obtenerQr()"
+              [disabled]="isLoading || !texto"
+            >
+              <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+              {{ isLoading ? 'Generando...' : 'Generar QR' }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="isLoading" class="text-center mt-4">
+        <p>Generando código QR, por favor espera...</p>
+        <div class="progress">
+          <div 
+            class="progress-bar progress-bar-striped progress-bar-animated" 
+            role="progressbar" 
+            style="width: 100%">
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="qrImg" class="text-center mt-4">
+        <h5 class="mb-3">¡Tu código QR está listo!</h5>
+        <img [src]="qrImg" class="img-fluid rounded shadow" alt="Código QR generado" />
+      </div>
+    </div>
+  </div>
+</div>
+
