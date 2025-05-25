@@ -1,0 +1,55 @@
+<div class="container mt-4">
+  <h1 class="text-center mb-4">Marcas de Autos</h1>
+
+  <!-- Spinner de carga -->
+  <div *ngIf="cargando" class="d-flex justify-content-center align-items-center" style="height: 50vh;">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
+  </div>
+
+  <!-- Botones de marcas -->
+  <div *ngIf="!cargando" class="d-flex justify-content-center">
+    <div class="btn-group flex-wrap" role="group" aria-label="Grupo de marcas">
+      <button
+        type="button"
+        class="btn btn-outline-primary m-1"
+        *ngFor="let marca of marcas"
+        (click)="abrirModal(marca)">
+        {{ marca.name }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Bootstrap -->
+<div class="modal fade" id="modelosModal" tabindex="-1" aria-labelledby="modelosModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modelosModalLabel">Modelos de {{ marcaSeleccionada }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="cargandoModelos" class="d-flex justify-content-center py-3">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando modelos...</span>
+          </div>
+        </div>
+
+        <ul *ngIf="!cargandoModelos && modelos.length > 0" class="list-group">
+          <li class="list-group-item" *ngFor="let modelo of modelos">
+            {{ modelo.name }}
+          </li>
+        </ul>
+
+        <div *ngIf="!cargandoModelos && modelos.length === 0" class="text-center text-muted">
+          No se encontraron modelos para esta marca.
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

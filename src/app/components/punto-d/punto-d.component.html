@@ -1,0 +1,48 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h2 class="text-center mb-4">Generador de Imágenes con IA 🤖</h2>
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <div class="mb-3">
+            <label for="promptInput" class="form-label">
+              <strong>Describe la imagen que quieres crear:</strong>
+            </label>
+            <textarea 
+              class="form-control" 
+              id="promptInput" 
+              rows="3" 
+              [(ngModel)]="prompt" 
+              placeholder="Ej: Un astronauta montando a caballo en Marte, estilo fotorealista.">
+            </textarea>
+          </div>
+          <div class="d-grid">
+            <button 
+              class="btn btn-primary btn-lg" 
+              (click)="generarImagen()" 
+              [disabled]="isLoading || !prompt">
+              <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              {{ isLoading ? 'Generando...' : 'Generar Imagen' }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="isLoading" class="text-center mt-4">
+        <p>Creando tu imagen, por favor espera un momento...</p>
+        <div class="progress">
+          <div 
+            class="progress-bar progress-bar-striped progress-bar-animated" 
+            role="progressbar" 
+            style="width: 100%">
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="imagenBase64" class="text-center mt-4 mb-3">
+        <h3 class="mb-3">¡Aquí está tu imagen!</h3>
+        <img [src]="imagenBase64" class="img-fluid rounded shadow" alt="Imagen generada por IA">
+      </div>
+    </div>
+  </div>
+</div>

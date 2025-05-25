@@ -1,0 +1,46 @@
+<div class="mb-5 mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-8">
+                <h1 class="text-center mb-4">Traductor</h1>
+                <form action="" method="post">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                        <label for="selectIdiomaEntrada" class="form-label">Idioma de Entrada</label>
+                        <select class="form-select mb-3" id="from" [(ngModel)]="from" aria-label="Seleccionar Idioma de Entrada" name="from">
+                            <option selected disabled>Seleccionar Idioma</option>
+                            <ng-container *ngIf="lenguajes.length > 0">
+                                <option *ngFor="let lenguaje of lenguajes" [value]="lenguaje.code" >
+                                    {{ lenguaje.language }}
+                                </option>
+                            </ng-container>
+                        </select>
+                        <div class="mb-3">
+                            <label for="textoEntrada" class="form-label" >Texto a Traducir</label>
+                            <textarea class="form-control" id="text" rows="5" [(ngModel)]="text" placeholder="Escribe el texto aquí..." name="text"></textarea>
+                        </div>
+                    </div>
+
+                        <div class="col-md-6">
+                        <label for="selectIdiomaSalida" class="form-label">Idioma de Salida</label>
+                        <select class="form-select mb-3" id="to" [(ngModel)]="to" aria-label="Seleccionar Idioma de Salida" name="to">
+                            <option selected disabled>Seleccionar Idioma</option>
+                            <ng-container *ngIf="lenguajes.length > 0">
+                                <option *ngFor="let lenguaje of lenguajes" [value]="lenguaje.code">
+                                    {{ lenguaje.language }}
+                                </option>
+                            </ng-container>
+                        </select>
+                        <div class="mb-3">
+                            <label for="textoSalida" class="form-label">Texto Traducido</label>
+                            <textarea class="form-control" id="translatedText" rows="5" [ngModel]="transcribedText" name="translatedText" readonly disabled></textarea>
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="d-grid gap-2 col-6 mx-auto mt-4">
+                        <button type="button" class="btn btn-success btn-lg" (click)="traducirTexto()">Traducir</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
